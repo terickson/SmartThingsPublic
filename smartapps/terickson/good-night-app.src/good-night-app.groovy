@@ -33,7 +33,7 @@ preferences {
 		input "offSwitches", "capability.switch", multiple: true, required: false
 	}
     
-    section("And close these garage doors") {
+	section("And close these garage doors") {
 		input "offGDoors", "capability.garageDoorControl", multiple: true, required: false
 	} 
     
@@ -50,15 +50,15 @@ def installed() {
 def updated() {
 	log.debug "Updated with settings: ${settings}"
 	unsubscribe()
-    subscribe(master, "switch.on", onHandler)
+	subscribe(master, "switch.on", onHandler)
 }
 
 def onHandler(evt) {
 	log.debug evt.value
 	log.debug offSwitches
-    log.debug offLocks
-    log.debug offGDoors
+	log.debug offLocks
+	log.debug offGDoors
 	offSwitches*.off()
-    offLocks*.lock()
-    offGDoors*.close()
+	offLocks*.lock()
+	offGDoors*.close()
 }
